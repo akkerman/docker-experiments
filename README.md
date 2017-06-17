@@ -14,4 +14,6 @@
         - two containers, using socket
         - two containers, also serve static via volume
 
-* multi stage build (previously builder pattern)
+## Done
+
+* [multi stage build](./multi-stage-build/)(previously builder pattern)
