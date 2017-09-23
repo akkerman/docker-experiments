@@ -8,7 +8,6 @@ services:
       driver: syslog
       options:
         tag: logging_service_js
-     
 
   python:
     build: ./service_py/
