@@ -4,4 +4,10 @@
 
 the current config logs all events to /var/log/syslog
 
-now find a way to log in a separate file
+put the following line in /etc/rsyslog.conf
+`:syslogtag, contains, "logging_service"  /var/log/logging_service.log`
+
+restart rsyslog
+`sudo service rsyslog restart`
+
+the messages are now also in a separate file
