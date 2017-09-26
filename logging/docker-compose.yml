@@ -1,0 +1,19 @@
+version: "2"
+
+services:
+  node:
+    build: ./service_js/
+    container_name: "logging_service_js"
+    logging:
+      driver: syslog
+      options:
+        tag: logging_service_js
+
+  python:
+    build: ./service_py/
+    container_name: "logging_service_py"
+    command: python -u app.py
+    logging:
+      driver: syslog
+      options:
+        tag: logging_service_py
