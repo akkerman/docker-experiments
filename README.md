@@ -10,10 +10,12 @@
   (shared network)
 
 * use uWSGI (nginx, flask)
-  * one container
-  * two containers, using socket
-  * two containers, also serve static via volume
+    * two containers, also serve static via volume
 
 ## Done
 
 * [multi stage build](./multi-stage-build/)(previously builder pattern)
+
+* use uWSGI (nginx, flask)
+    * [basics](./wsgi-0)
+    * [two containers](./wsgi) (tcp socket, context root configurable in nginx)
