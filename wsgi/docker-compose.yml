@@ -1,0 +1,16 @@
+version: '2'
+services:
+  nginx:
+    container_name: wsgi_nginx
+    image: wsgi_nginx
+    build: ./nginx
+    ports: 
+      - 8008:80
+
+  py1:
+    container_name: wsgi_python1
+    image: wsgi_python1
+    build: ./python1
+    expose:
+      - 5000
+
