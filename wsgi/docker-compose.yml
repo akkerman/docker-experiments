@@ -4,10 +4,12 @@ services:
     container_name: wsgi_nginx
     image: wsgi_nginx
     build: ./nginx
+    depends_on:
+      - python1
     ports: 
       - 8008:80
 
-  py1:
+  python1:
     container_name: wsgi_python1
     image: wsgi_python1
     build: ./python1
