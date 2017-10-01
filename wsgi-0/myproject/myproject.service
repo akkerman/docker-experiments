@@ -1,0 +1,7 @@
+# file:  /etc/systemd/system/myproject.service
+[Unit]
+Description=uWSGI server instance configured to server myproject
+
+[Service]
+WorkingDirectory=/vagrant/myproject
+ExecStart=/vagrant/myproject/env/bin/uwsgi --ini myproject.ini
