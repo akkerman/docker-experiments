@@ -16,4 +16,5 @@
 
 ## Done
 
-* [multi stage build](./multi-stage-build/)(previously builder pattern)
+* [multi stage build](./multi-stage-build/) (previously builder pattern)
+* [logging](./logging) (rsyslog)
