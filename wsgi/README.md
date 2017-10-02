@@ -11,4 +11,5 @@ using a tcp-socket seems a more feasable approach using docker.
 * http://flask.pocoo.org/docs/dev/deploying/wsgi-standalone/#uwsgi
 * https://github.com/webpatch/Docker-Flask-uWSGI-Nginx
 * https://gist.github.com/Larivact/1ee3bad0e53b2e2c4e40
-* https://stackoverflow.com/questions/18967441/add-a-prefix-to-all-flask-routes/18967744#18967744
+* prefix to app https://stackoverflow.com/questions/18967441/add-a-prefix-to-all-flask-routes/18967744#18967744
+* mountpoint http://uwsgi-docs.readthedocs.io/en/latest/Nginx.html
