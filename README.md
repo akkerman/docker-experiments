@@ -18,4 +18,4 @@
 * [logging](./logging) (rsyslog)
 * use uWSGI (nginx, flask)
     * [basics](./wsgi-0)
-    * [two containers](./wsgi) (tcp socket, context root configurable in nginx)
+    * [two containers](./wsgi) (tcp socket)

@@ -6,5 +6,5 @@ COPY ./requirements.txt /tmp/
 RUN pip install -r /tmp/requirements.txt
 COPY ./*.py ./
 COPY ./uwsgi.ini ./
-CMD ["uwsgi", "--master", "uwsgi.ini"]
+CMD ["uwsgi", "uwsgi.ini"]
 
