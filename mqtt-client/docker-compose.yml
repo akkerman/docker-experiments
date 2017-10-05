@@ -1,0 +1,15 @@
+version: '2'
+services:
+  mqtt:
+    container_name: mqttc_broker
+    image: mqttc_broker
+    build: ./broker
+    ports: 
+      - 1883:1883
+  
+  
+  client:
+    container_name: mqttc_client
+    image: mqttc_client
+    build: ./client
+
