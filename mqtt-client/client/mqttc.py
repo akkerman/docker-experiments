@@ -1,4 +1,5 @@
 import signal
+import threading
 import paho.mqtt.client as mqtt
 
 client = mqtt.Client()
@@ -23,9 +24,6 @@ def on_disconnect(client, userdat, rc):
         sys.exit(0)
     print("unexpected disconnect")
 
-def on_message(client, userdata, msg):
-    print(msg.topic+" "+str(msg.payload))
-
 def on_message_development(client, userdata, msg):
     print("processing development")
 
@@ -45,6 +43,10 @@ def setup():
     signal.signal(signal.SIGINT, disconnect)
     signal.signal(signal.SIGTERM, disconnect)
 
+def loop():
+    threading.Timer(60.0, loop).start() # called every minute
+    print('loop')
 
 setup()
+loop()
 client.loop_forever()
