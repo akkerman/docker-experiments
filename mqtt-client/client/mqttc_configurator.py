@@ -7,12 +7,12 @@ import signal
 import threading
 import paho.mqtt.client as mqtt
 
-def mqttc_configurator(name=None, subscribe_to=None, loop_delay=60.0):
+def mqttc_configurator(client_id=None, subscribe_to=None, loop_delay=60.0):
     """ configure mqttc and a shutdown handler """
-    assert name is not None
+    assert client_id is not None
     assert loop_delay > 1
 
-    lwt_topic = 'status/' + name
+    lwt_topic = 'status/' + client_id
     client = mqtt.Client()
 
     def on_connect(client, userdata, flags, resultcode):
@@ -63,6 +63,7 @@ def mqttc_configurator(name=None, subscribe_to=None, loop_delay=60.0):
     configure_client()
     add_signal_handler()
     loop = yield client
-    start_loop(loop)
+    if loop:
+        start_loop(loop)
     client.loop_forever()
     yield

@@ -20,7 +20,7 @@ def loop():
 def setup():
     """ configure this mqtt client """
     config = mqttc_configurator(
-        name='mqttc2',
+        client_id='mqttc2',
         subscribe_to=[(TOPIC_DEVELOPMENT, 1), (TOPIC_RESEARCH, 1)],
         loop_delay=60.0
         )
@@ -29,5 +29,6 @@ def setup():
     client.message_callback_add(TOPIC_DEVELOPMENT, on_message_development)
     client.message_callback_add(TOPIC_RESEARCH, on_message_research)
     config.send(loop)
+    # config.send(None)
 
 setup()
