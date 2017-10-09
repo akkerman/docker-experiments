@@ -21,7 +21,7 @@ def setup():
     """ configure this mqtt client """
     config = mqttc_configurator(
         client_id='mqttc2',
-        subscribe_to=[(TOPIC_DEVELOPMENT, 1), (TOPIC_RESEARCH, 1)],
+        subscribe_to=[(TOPIC_DEVELOPMENT, 1), (TOPIC_RESEARCH, 2)],
         loop_delay=60.0
         )
 

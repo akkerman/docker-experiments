@@ -13,7 +13,7 @@ def mqttc_configurator(client_id=None, subscribe_to=None, loop_delay=60.0):
     assert loop_delay > 1
 
     lwt_topic = 'status/' + client_id
-    client = mqtt.Client()
+    client = mqtt.Client(client_id=client_id, clean_session=False)
     loop_options = dict()
 
     def on_connect(client, userdata, flags, resultcode):
