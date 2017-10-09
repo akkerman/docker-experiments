@@ -1,4 +1,4 @@
-""" generic way to create a mqtt client
+""" generic way to create a mqtt clientG
     with it's own event loop and doesn't block
     to be able to respond to shutdown signals """
 
@@ -14,6 +14,7 @@ def mqttc_configurator(client_id=None, subscribe_to=None, loop_delay=60.0):
 
     lwt_topic = 'status/' + client_id
     client = mqtt.Client()
+    loop_options = dict()
 
     def on_connect(client, userdata, flags, resultcode):
         """ handle connection established to mqtt broker """
@@ -35,14 +36,20 @@ def mqttc_configurator(client_id=None, subscribe_to=None, loop_delay=60.0):
 
     def add_signal_handler():
         """ add a signal handler to SIGINT and SIGTERM """
-        def signal_handler(signum, frame):
+        def on_signal_received(signum, frame):
             """ handle system signals, disconnect mqtt """
-            print('recieved signal', signum, frame)
+            print('recieved signal', signum)
+            try:
+                loop_options['timer'].cancel()
+                print('loop timer canceled')
+            except KeyError:
+                print('loop timer not set')
+
             client.publish(lwt_topic, 'offline', qos=0, retain=True)
             client.loop()
             client.disconnect()
-        signal.signal(signal.SIGINT, signal_handler)
-        signal.signal(signal.SIGTERM, signal_handler)
+        signal.signal(signal.SIGINT, on_signal_received)
+        signal.signal(signal.SIGTERM, on_signal_received)
 
     def configure_client():
         """ configure the mqtt client """
@@ -54,9 +61,11 @@ def mqttc_configurator(client_id=None, subscribe_to=None, loop_delay=60.0):
 
     def start_loop(func):
         """ start looping the given function """
+        loop_options['func'] = func
         def looper():
             """ schedule itself every 'loop_delay' seconds """
-            threading.Timer(loop_delay, looper).start() # called every minute
+            loop_options['timer'] = threading.Timer(loop_delay, looper)
+            loop_options['timer'].start()
             func()
         looper()
 
@@ -64,6 +73,7 @@ def mqttc_configurator(client_id=None, subscribe_to=None, loop_delay=60.0):
     add_signal_handler()
     loop = yield client
     if loop:
+        print("start loop")
         start_loop(loop)
     client.loop_forever()
     yield
