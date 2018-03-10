@@ -9,8 +9,10 @@
   from different docker-compose files  
   (shared network)
 
-* use uWSGI (nginx, flask)
-    * two containers, also serve static via volume
+* nginx static and dynamic
+    serve static files and proxy dynamic backend with only two containers
+    - one nginx container and
+    - one python (flask) or nodejs (express) container
 
 ## Done
 
