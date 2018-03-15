@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  node:
+    container_name: dev_node
+    image: node
+    build: ./node
+    ports:
+      - 3000:3000
+    volumes:
+      - gui:/app/src
+
+  nginx:
+    container_name: dev_nginx
+    image: nginx
+    build: ./nginx
+    ports:
+      - 3800:80
+    volumes:
+      - gui:/static
+    depends_on:
+      - node
+
+volumes:
+  gui:
+
